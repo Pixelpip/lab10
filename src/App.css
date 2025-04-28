@@ -1,0 +1,189 @@
+/* App.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Urbanist:wght@400;500;700&display=swap');
+
+/* Reset and Base Styles */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Urbanist', sans-serif; /* Trendy, modern sans-serif */
+  margin: 0;
+  /* Option 1: Dynamic Gradient */
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #ffe66d, #81c784);
+  background-size: 400% 400%;
+  animation: gradientAnimation 15s ease infinite;
+  /* Option 2: Subtle Abstract Background (you might need to find a nice image URL) */
+  /* background-image: url('your-abstract-background-url.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed; */
+  color: #333;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.data-fetcher {
+  width: 90%;
+  max-width: 700px;
+  padding: 30px;
+  background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white */
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
+  backdrop-filter: blur(10px); /* Frosted glass effect */
+}
+
+h1 {
+  font-family: 'Poppins', sans-serif; /* More expressive font for heading */
+  text-align: center;
+  color: #2c3e50; /* Deep bluish grey */
+  font-size: 3rem;
+  margin-bottom: 30px;
+  letter-spacing: -1px;
+  font-weight: 800;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.search-bar {
+  margin: 30px 0;
+  text-align: center;
+}
+
+.search-bar input {
+  padding: 14px 20px;
+  width: 80%;
+  font-size: 18px;
+  border: 2px solid #6c5ce7; /* Trendy purple */
+  border-radius: 10px;
+  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.search-bar input:focus {
+  outline: none;
+  border-color: #a29bfe; /* Lighter purple on focus */
+  box-shadow: 0 0 12px rgba(162, 155, 254, 0.5);
+}
+
+button {
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  font-weight: 600;
+  background: #00b894; /* Vibrant teal */
+  margin-top: 30px;
+  padding: 14px 30px;
+  font-size: 18px;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+button:hover {
+  background-color: #008a6c; /* Darker teal on hover */
+  transform: translateY(-3px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+table {
+  width: 100%;
+  margin-top: 30px;
+  border-collapse: collapse;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+table thead {
+  background-color: #f3f3f3;
+  border-bottom: 2px solid #ddd;
+}
+
+table th,
+table td {
+  padding: 18px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+table th {
+  font-weight: 700;
+  color: #555;
+}
+
+table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+table tbody tr:hover {
+  background-color: #e6f7ff; /* Light blue on hover */
+  transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+  transform: scaleY(1.02);
+  cursor: pointer;
+}
+
+.error {
+  color: #ff4d4d; /* Bright red for error */
+  text-align: center;
+  margin-top: 30px;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.loading-container {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 1.2rem;
+  color: #777;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .data-fetcher {
+    width: 95%;
+    padding: 25px;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 25px;
+  }
+
+  .search-bar input {
+    width: 95%;
+    font-size: 16px;
+    padding: 12px 15px;
+  }
+
+  button {
+    font-size: 16px;
+    padding: 12px 25px;
+  }
+
+  table th,
+  table td {
+    padding: 14px;
+    font-size: 0.95rem;
+  }
+}
