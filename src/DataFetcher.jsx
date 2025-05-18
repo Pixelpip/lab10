@@ -1,10 +1,9 @@
-import { Component } from "react";
-import "./App.css"
+import React, { Component } from 'react';
 
-const API_URL = `https://jsonplaceholder.typicode.com/users`;
+const API_URL = 'https://jsonplaceholder.typicode.com/users';
 
 class DataFetcher extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       data: [],
@@ -13,11 +12,12 @@ class DataFetcher extends Component {
       error: null,
       loading: false,
     };
-  };
+  }
 
   componentDidMount() {
     this.fetchData();
-  };
+  }
+
   fetchData = async () => {
     this.setState({ loading: true, error: null });
     try {
@@ -32,81 +32,82 @@ class DataFetcher extends Component {
     }
   };
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.searchQuery !== this.state.searchQuery) {
-      this.filterData();
-    }
-  }
-
   handleSearchChange = (event) => {
-    this.setState({ searchQuery: event.target.value });
-  };
+  const value = event.target.value;
+  this.setState({ searchQuery: value }, () => {
+    this.filterData(); // Call filter after state is updated
+  });
+};
+
 
   filterData = () => {
-    const {data, searchQuery} = this.state;
-    if(searchQuery.trim() === ""){
-      this.setState({filteredData: data});
-    }
-    else{
-      const filteredData = data.filter(item =>
+    const { data, searchQuery } = this.state;
+    if (searchQuery.trim() === '') {
+      this.setState({ filteredData: data });
+    } else {
+      const filteredData = data.filter((item) =>
         item.name.toLowerCase().includes(searchQuery.toLowerCase())
       );
       this.setState({ filteredData });
     }
-  }
+  };
 
   renderError = () => {
     const { error } = this.state;
-    return error ? <div>Error: {error}</div> : null;
-  }
+    return error ? <div className="error">{`Error: ${error}`}</div> : null;
+  };
 
   render() {
-    const {filteredData, searchQuery, loading} = this.state;
+    const { filteredData, searchQuery, loading } = this.state;
 
     return (
-      <div className="data-fetcher" style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
-        <h1>User data</h1>
+      <div className="data-fetcher">
+        <h1 className='header'>User Data</h1>
 
         {this.renderError()}
 
         <div className="search-bar">
-          <input type="text" value={searchQuery} onChange={this.handleSearchChange} placeholder="Search By name" />
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={this.handleSearchChange}
+            placeholder="Search by name"
+          />
         </div>
 
         {loading ? (
-        <div>Loading...</div>
-      ) : (
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>City</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredData.length > 0 ? (
-              filteredData.map((item) => (
-                <tr key={item.id}>
-                  <td>{item.name}</td>
-                  <td>{item.email}</td>
-                  <td>{item.address.city}</td>
-                </tr>
-              ))
-            ) : (
+          <div>Loading...</div>
+        ) : (
+          <table>
+            <thead>
               <tr>
-                <td colSpan="3">No results found.</td>
+                <th>Name</th>
+                <th>Email</th>
+                <th>City</th>
               </tr>
-            )}
-          </tbody>
-        </table>
-      )}
-      
-      <button onClick={this.fetchData}>Refresh Data</button>
+            </thead>
+            <tbody>
+              {filteredData.length > 0 ? (
+                filteredData.map((item) => (
+                  <tr key={item.id}>
+                    <td>{item.name}</td>
+                    <td>{item.email}</td>
+                    <td>{item.address.city}</td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="3">No results found.</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        )}
+
+        <button onClick={this.fetchData}>Refresh Data</button>
       </div>
-    )
+    );
   }
 }
 
-
-export default DataFetcher
+export default DataFetcher;
